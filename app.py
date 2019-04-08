@@ -4,6 +4,7 @@ from difflib import SequenceMatcher, get_close_matches
 data = json.load(open("data.json"))
 
 def translate(word):
+    word = word.lower()
     if word in data:
         return data[word]
     elif len(get_close_matches(word, data.keys())) > 0:
@@ -19,4 +20,10 @@ def translate(word):
 
 word = input("Enter Word: ")
 
-print(translate(word.lower()))
+output = translate(word)
+
+if type(output) == list:
+    for item in output:
+        print(item)
+else:
+    print(output)
